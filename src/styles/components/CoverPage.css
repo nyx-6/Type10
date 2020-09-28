@@ -1,0 +1,16 @@
+.CoverPage {
+    height: 100%;
+    background-color: #1B0830 ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../../statics/texture.png');
+    font-size: 8vw;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+}
+
+.slogan {
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,18 @@
+.Header {
+    display: flex;
+    background-color:#1B0830;
+    height: 5vh;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.content_box {
+    height: 100%;
+    display: flex;
+    flex: 1;
+  }
+
+.box {
+    height: 100%;
+    flex: 1;
+  }

@@ -1,0 +1,54 @@
+.Start {
+  height: 100%;
+}
+
+div.Start div.content_box:first-child {
+  padding-left: 15px;
+} 
+
+div.Start div.content_box:last-child {
+  padding-right: 15px;
+} 
+
+div.Start div.content_box:not(:last-child) {
+  padding-right: 10px;
+}
+
+.tier {
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+}
+
+.image { 
+  height: 180px;
+}
+
+.img_hands {
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.text {
+  font-weight: 300;
+  color: #6c6e6f;
+  font-size: 15px;
+}
+
+.title {
+  margin-top: 25px;
+  color: #1B0830;
+  font-size: 25px;
+}
+
+.subTitle {
+  font-weight: 500;
+  color: #6c6e6f;
+}
+
+.imgSubTitle {
+  font-size: 20px;
+  font-weight: 400;
+  color:#F38E8E ;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
