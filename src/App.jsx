@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Start from './components/Start';
 import Cover from './components/CoverPage';
-import Exercise from './components/Exercise';
+import Level from './components/Level';
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
 
             <div className="right nav content_box" >
               <li><Link to={'/start'} >Inicio</Link></li>
-              <li><Link to={'/exercise'}>Ejercicios</Link></li> 
+              <li><Link to={'/level'}>Ejercicios</Link></li> 
             </div>
 
           </nav>
@@ -30,7 +30,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={Cover} />
           <Route path='/start' component={Start} />
-          <Route path='/exercise' component={Exercise} />
+          <Route path='/level' component={Level} />
         </Switch>
 
       </Router>

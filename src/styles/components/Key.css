@@ -1,0 +1,41 @@
+.key {
+    display: flex;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px;
+    border-radius: 7px;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+   
+    box-shadow: 0 3px 5px #78CFE4;
+    margin-right: 5px;
+}
+
+.key:first-child {
+    margin-left: 5px;
+}
+
+.value {
+    font-size: larger;
+    font-weight: 500;
+}
+
+.regular {
+    background-color: #EDF5FC;
+    color: #B4B2D3;
+}
+
+.pressed {
+    background-color: #ddb3ff;
+    color: white;
+}
+
+.system {
+    flex-grow: 2;
+}
+
+.space {
+    flex-grow: 5;
+}
