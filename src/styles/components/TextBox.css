@@ -1,0 +1,14 @@
+.typing {
+
+    background-color: #EDF5FC;
+    width: 650px;
+    height: 50px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    box-shadow: 0 0 10px #f7ecff;
+    color: black;
+    font-size: 20px;
+}
+

@@ -1,39 +1,13 @@
-.panel {
+.Exercice {
     width: 650px;
     height: 80px;
     background-color: #EDF5FC;
     border-radius: 15px;
-    color: white;
+    color: black;
     display: flex;
     align-items: center;
     border-width: 1px;
     justify-content: center;
     margin-bottom: 20px;
-}
-
-.exercice {
     font-size: 25px;
 }
-
-.typing {
-
-    background-color: #EDF5FC;
-    width: 650px;
-    height: 50px;
-    border-radius: 15px;
-    border-style: solid;
-    border-color: white;
-    border-width: 1px;
-    box-shadow: 0 0 10px #f7ecff;
-    color: white;
-    font-size: 20px;
-}
-
-.wrong {
-    color: red;
-}
-
-.ok {
-    color: #9765f4;
-}
-
