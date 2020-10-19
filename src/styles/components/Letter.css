@@ -1,16 +1,17 @@
 
-.red {
-    color: red;
+.wrong {
+    background-color:rgba(255, 63, 63, 0.5);
+    color: #9e0f0f;
 }
 
-.blue {
-    color: #9765f4;
+.ok {
+    background-color: rgba(75, 136, 236, 0.5);
+    color: #235097;
 }
 
-.black{
-    color:black
+.current{
+    color:#4f5764
 }
-
 
 .letter {
     white-space:pre;

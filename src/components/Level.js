@@ -3,6 +3,7 @@ import "../styles/components/Level.css";
 import Keyboard from './keyboard/Keyboard'
 import Exercice from './Exercice'
 import TextBox from './TextBox'
+import Modal from './Modal'
 
 
 class Level extends React.Component {
@@ -13,7 +14,8 @@ class Level extends React.Component {
         exercice: [],
         index: 0,
         currentExerciceLetter: "",
-        isWrong: false
+        score: 0,
+        modalIsOpen: false,
     }
 
     constructor(props) {
@@ -49,10 +51,10 @@ class Level extends React.Component {
 
                 index = this.getRandomNumbers(min, max);
                 letter = this.allowedLetters[index];
-                exercice.push({ letter: letter, color: 'black' })
+                exercice.push({ letter: letter, color: 'current' })
             }
 
-        exercice.push({ letter: ' ', color: 'black' })
+            exercice.push({ letter: ' ', color: 'current' })
         }
         exercice.pop()
 
@@ -61,27 +63,50 @@ class Level extends React.Component {
         })
     }
 
+    handleCloseModal = e => {
+        this.setState({ modalIsOpen: false })
+    }
+    handleOpenModal = async e => {
+        await this.setState({ modalIsOpen: true })
+        console.log("Score", this.state.score);
+        console.log("modal", this.state.modalIsOpen);
+    }
+
     handleKeyDown = e => {
-        let letters = [...this.state.exercice];
-   
-        this.setState({
-            pressedKey: e.key,
-            typedLetters: this.state.typedLetters + e.key,
-            currentExerciceLetter: letters[this.state.index].letter,
-        });
+        if (this.state.index < this.state.exercice.length) {
+            let letters = [...this.state.exercice];
+
+            this.setState({
+                pressedKey: e.key,
+                typedLetters: this.state.typedLetters + e.key,
+                currentExerciceLetter: letters[this.state.index].letter,
+            });
+        }
     }
 
     handleKeyUp = e => {
         this.setState({
             pressedKey: "",
         });
-        const isWrong = this.state.pressedKey !== this.state.currentExerciceLetter
-        const exercise = [...this.state.exercice]
-        exercise[this.state.index].color = isWrong ? 'red' : 'blue'
-        this.setState({
-            exercise,
-            index: this.state.index + 1,
-        })
+
+        if (this.state.index < this.state.exercice.length) {
+
+            const exercise = [...this.state.exercice]
+            const isWrong = this.state.pressedKey !== this.state.currentExerciceLetter
+
+            exercise[this.state.index].color = isWrong ? 'wrong' : 'ok'
+            const point = isWrong ? 0 : 1
+
+            this.setState({
+                exercise,
+                index: this.state.index + 1,
+                score: this.state.score + point,
+            })
+
+            if (this.state.index === this.state.exercice.length - 1) {
+                this.handleOpenModal();
+            }
+        }
     }
 
     getRandomNumbers(min, max) {
@@ -91,15 +116,27 @@ class Level extends React.Component {
     }
 
     render() {
-
         return (
             <div className="Level ">
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onClose={this.handleCloseModal}
+                >
+                    <div className="">
+                        <h1>Score: {this.state.score}</h1>
+                        <p>You are about to delete this badge</p>
+
+                        <div>
+                            <button onClick={this.handleCloseModal} className="">OK</button>
+                        </div>
+
+                    </div>
+                </Modal>
                 <div className="content_box">
                     <div className="box"></div>
                     <div className="box">
                         <Exercice
                             exercice={this.state.exercice}
-                            isWrong={this.state.isWrong}
                         />
                         <TextBox
                             disabledInputText={this.isDisabled}
