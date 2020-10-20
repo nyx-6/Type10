@@ -4,7 +4,7 @@ import Keyboard from './keyboard/Keyboard'
 import Exercice from './Exercice'
 import TextBox from './TextBox'
 import Modal from './Modal'
-
+import { Link } from 'react-router-dom';
 
 class Level extends React.Component {
 
@@ -15,22 +15,30 @@ class Level extends React.Component {
         index: 0,
         currentExerciceLetter: "",
         score: 0,
-        modalIsOpen: false,
+        finalModalIsOpen: false,
+        startModalIsOpen: false,
+        outFocusModalIsOpen: false,
+        outFocusModalIsEnable: false,
     }
 
     constructor(props) {
         super(props);
 
+        const { letters } = this.props.location.state;
+        const allowedLetters = letters === undefined ? localStorage.getItem('localAllowedLetters') : letters;
+
         this.keyboard = React.createRef();
         this.isDisabled = true;
         this.wordsNumber = 8;
         this.lettersByWord = 5;
-        this.allowedLetters = ['F', 'J'];
+        this.allowedLetters = allowedLetters;
+        localStorage.setItem('localAllowedLetters', allowedLetters);
+       
     }
 
     componentDidMount() {
         this.generateExercice();
-        this.setFocusOnKeyBoard();
+        this.handleOpenStartModal();
     }
 
     setFocusOnKeyBoard = () => {
@@ -63,13 +71,33 @@ class Level extends React.Component {
         })
     }
 
-    handleCloseModal = e => {
-        this.setState({ modalIsOpen: false })
+    handleCloseStartModal = e => {
+        this.setState({ startModalIsOpen: false })
+        this.setFocusOnKeyBoard();
     }
-    handleOpenModal = async e => {
-        await this.setState({ modalIsOpen: true })
-        console.log("Score", this.state.score);
-        console.log("modal", this.state.modalIsOpen);
+    handleOpenStartModal = async e => {
+        await this.setState({
+            startModalIsOpen: true,
+            outFocusModalIsEnable: true
+        })
+    }
+    handleCloseOutFocusModal = async e => {
+        await this.setState({ outFocusModalIsOpen: false })
+        this.setFocusOnKeyBoard();
+    }
+    handleOpenOutFocusModal = async e => {
+        if (this.state.outFocusModalIsEnable) {
+            await this.setState({ outFocusModalIsOpen: true })
+        }
+    }
+    handleCloseFinalModal = e => {
+        this.setState({ finalModalIsOpen: false })
+    }
+    handleOpenFinalModal = async e => {
+        await this.setState({
+            finalModalIsOpen: true,
+            outFocusModalIsEnable: false
+        })
     }
 
     handleKeyDown = e => {
@@ -104,7 +132,7 @@ class Level extends React.Component {
             })
 
             if (this.state.index === this.state.exercice.length - 1) {
-                this.handleOpenModal();
+                this.handleOpenFinalModal();
             }
         }
     }
@@ -119,15 +147,17 @@ class Level extends React.Component {
         return (
             <div className="Level ">
                 <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onClose={this.handleCloseModal}
+                    isOpen={this.state.startModalIsOpen}
+                    onClose={this.handleCloseStartModal}
                 >
                     <div className="">
-                        <h1>Score: {this.state.score}</h1>
-                        <p>You are about to delete this badge</p>
+
+                        <h1>Iniciar</h1>
+
 
                         <div>
-                            <button onClick={this.handleCloseModal} className="">OK</button>
+                            <Link to={'/exercises'}>Cancelar</Link>
+                            <button onClick={this.handleCloseStartModal} className="">OK</button>
                         </div>
 
                     </div>
@@ -147,10 +177,34 @@ class Level extends React.Component {
                             keyDown={this.handleKeyDown}
                             keyUp={this.handleKeyUp}
                             pressedKey={this.state.pressedKey}
+                            outFocus={this.handleOpenOutFocusModal}
+                            isOpen={this.state.outFocusModalIsOpen}
+                            onClose={this.handleCloseOutFocusModal}
                         />
                     </div>
                     <div className="box"></div>
                 </div>
+                <Modal
+                    isOpen={this.state.finalModalIsOpen}
+                    onClose={this.handleCloseFinalModal}
+                >
+                    <div className="">
+
+                        <h1>Terminaste el ejercicio</h1>
+                        <p>Este es tu puntaje:</p>
+
+                        <h3>Score: {this.state.score}</h3>
+                        <h3>PPM: 80</h3>
+
+                        <p>Te recomendamos repetir el nivel</p>
+
+                        <div>
+                            <a href="/level">Repetir</a>
+                            <Link to={'/exercises'}>Siguiente</Link>
+                        </div>
+
+                    </div>
+                </Modal>
             </div>
         )
     }

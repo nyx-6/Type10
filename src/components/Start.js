@@ -8,8 +8,8 @@ import rightHand from "../statics/righthand.png"
 
 function Start() {
     return (
-        <div className="Start">
-            <div className="content_box">
+        // <div className="Start">
+            <div className="Start content_box">
                 <div className="tier content_box">
                     <span className="title">¿Qué es Type10?</span>
 
@@ -109,7 +109,7 @@ function Start() {
 
                 </div>
             </div>
-        </div>
+        // </div>
     );
 }
 

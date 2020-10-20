@@ -1,5 +1,6 @@
 .Start {
   height: 100%;
+  flex-wrap: wrap;
 }
 
 div.Start div.content_box:first-child {
