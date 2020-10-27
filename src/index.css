@@ -4,10 +4,11 @@ body {
   height: 100vh;
   width: 100%;
   background-color: #F9F9F9;
+  /* overflow: hidden; */
 }
 
 .red {
-  color: #D85A5A;
+  color: #FF6663;
 }
 
 .white {
@@ -23,4 +24,18 @@ body {
 .box {
   height: 100%;
   flex: 1;
+}
+
+a.link-unstyled {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.link-unstyled:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+li.list-unstyled {
+  list-style-type: none;
 }

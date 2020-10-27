@@ -1,16 +1,15 @@
-.CoverPage {
-    height: 100%;
-    background-color: #1B0830 ;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url('../../statics/texture.png');
-    font-size: 8vw;
+.cover__page {
+    height: 100vh;
+    background: #B6DCFE;  
+    background-image: url('../../statics/texture2.png');
+    background-image: url('../../statics/texture2.png'), linear-gradient(to bottom, #B6DCFE, #20C4DC);
+    background-image: url('../../statics/texture2.png'), -webkit-linear-gradient(to bottom, #B6DCFE, #20C4DC);
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
+    font-size: 100px;
     font-weight: 700;
-    display: flex;
-    flex-direction: column;
-}
-
-.slogan {
+    /* display: flex; */
     align-items: center;
     justify-content: center;
 }
+

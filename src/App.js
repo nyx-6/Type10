@@ -14,15 +14,20 @@ function App() {
 
       <Router>
         <header className="header">
-          <nav className="content_box">
+          <nav className="nav">
 
-            <div className="left nav content_box">
-              <li><Link to={'/'}><span className="red logo">Type</span><span className="withe logo">10</span></Link></li>
+            <div className="left__side_nav content_box">
+              <li>
+                <Link to={'/'}>
+                  <span className="red logo">Type</span>
+                  <span className="withe logo">10</span>
+                </Link>
+              </li>
             </div>
 
-            <div className="right nav content_box" >
-              <li><Link to={'/start'} >Inicio</Link></li>
-              <li><Link to={'/exercises'}>Ejercicios</Link></li> 
+            <div className="right__side_nav content_box">
+              <li className="menu__option"><Link to={'/start'} className="menu__link">Instrucciones</Link></li>
+              <li className="menu__option"><Link to={'/exercises'} className="menu__link">Ejercicios</Link></li>
             </div>
 
           </nav>

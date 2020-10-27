@@ -14,5 +14,7 @@
 }
 
 .letter {
+    font-size: 15px;
     white-space:pre;
+    height: 20px;
 }

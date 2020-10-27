@@ -1,0 +1,40 @@
+
+
+.section {
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #4C6663; */
+    background-image: url("../../statics/spaceback.jpg");
+
+}
+
+.lesson {
+    width: 70%;
+
+    /* background-color: #C9D7F8; */
+}
+
+.gallery {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: fixed;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+
+.lesson__title_header {
+    width: 100%;
+    height: 100px;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    
+}
+
+.lesson__title {
+    font-size: 50px;
+    font-weight: 900;
+    color: #58FCEC;
+}

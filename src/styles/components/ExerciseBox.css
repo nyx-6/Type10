@@ -1,13 +1,13 @@
-.Exercice {
+.ExerciseBox {
     width: 650px;
     height: 80px;
     background-color: #EDF5FC;
     border-radius: 15px;
-    color: black;
-    display: flex;
-    align-items: center;
     border-width: 1px;
-    justify-content: center;
     margin-bottom: 20px;
-    font-size: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    /* justify-content: center; */
 }
+

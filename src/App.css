@@ -5,37 +5,51 @@
     font-family: 'Titillium Web', sans-serif;
 }
 
-.header  {
+.header {
     width: 100%;
-    height: 55px;
-    background-color: #1B0830;
+    height: 50px;
+    background-color: #272727;
 }
 
-nav div.nav.content_box{
+nav  {
     list-style: none;
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
 
-nav div.nav.content_box li a {
+nav.nav li a {
     text-decoration: none;
     color: #ffffff;
 }
 
-nav div.right.nav.content_box li a {
-    margin-right: 20px;
+nav.nav div.left__side_nav.content_box{
+    align-items: center; 
 }
 
-nav div.right.nav.content_box {
-    align-items: center;
-    justify-content: right;
+nav.nav div.right__side_nav.content_box{
+    justify-content: flex-end;
 }
-nav div.left.nav.content_box {
-    align-items: center;
-    justify-content: left;
-    margin-left: 20px;
+
+li.menu__option {
+    height: 100%;
+    width: 150px;
+    display: flex;
+}
+
+a.menu__link {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+a.menu__link:hover {
+  background-color: #3d3d3d;
 }
 
 .logo {
-    font-size: 4vh;
+    font-size: 3vh;
     font-weight: 600;
     align-items: center;
 }

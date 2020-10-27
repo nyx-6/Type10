@@ -1,32 +1,29 @@
 import React from "react";
 import Api from "../API.js"
-import { Link } from "react-router-dom";
-
+import "../styles/components/Exercises.css"
+import ExerciseInfo from "./ExerciseInfo";
 
 class Exercises extends React.Component {
     render() {
         return (
-            <div>
-                {Api.map((exercise) =>
-                    <Link to={{
-                        pathname: './level',
-                        state: {
-                            letters: exercise.letters
-                        },
-                    }} >
-                        <div key={exercise.exerciseId}>
-                            <h2>{exercise.line}</h2>
-                            <h4>Ejercicio {exercise.exerciseId}</h4>
-                            <ul>
-                                {exercise.letters.map((letter, i) => <li key={i}>{letter}</li>)}
-                            </ul>
+            <React.Fragment>
+                <section className="section content_box">
+                    <div className="lesson ">
+                        <div className="lesson__title_header content_box">
+                            <span className="lesson__title">Línea Base</span>
                         </div>
-                    </Link>
-                )}
-            </div>
+                        <div className="gallery content_box">
+                            {Api.map((info) =>
+                                <ExerciseInfo info={info}/>
+                            )}
+                        </div>
+
+                    </div>
+                </section>
+
+            </React.Fragment>
         )
     }
 }
-
 
 export default Exercises;

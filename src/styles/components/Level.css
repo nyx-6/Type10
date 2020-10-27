@@ -1,3 +1,21 @@
-.Exercise {
-    height: 100%;
+.level {
+
+    /* background-image: url("../../statics/robots2back.jpg"); */
+    /* background-image: url("../../statics/aliensback.jpg"); */
+     /* background-image: url("../../statics/alien.jpg"); */
+     /* background-image: url("../../statics/catback.jpg"); */
+     /* background-image: url("../../statics/cats2back.jpg"); */
+     /* background-image: url("../../statics/pandas.jpg"); */
+     /* background-image: url("../../statics/pandas2.jpg"); */
+     /* background-image: url("../../statics/donuts.png"); */
+     /* background-image: url("../../statics/hongos.jpg"); */
+     /* background-image: url("../../statics/gosth.jpg"); */
+    /* background-image: url("../../statics/robotback.jpg"); */
+    /* background-image: url("../../statics/spaceback.jpg"); */
+
+}
+
+.panel { 
+    flex-direction: column;
+    align-items: center;
 }

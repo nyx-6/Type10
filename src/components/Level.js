@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/components/Level.css";
 import Keyboard from './keyboard/Keyboard'
-import Exercice from './Exercice'
+import ExerciseBox from './ExerciseBox'
 import TextBox from './TextBox'
 import Modal from './Modal'
 import { Link } from 'react-router-dom';
@@ -19,21 +19,29 @@ class Level extends React.Component {
         startModalIsOpen: false,
         outFocusModalIsOpen: false,
         outFocusModalIsEnable: false,
+        timetaken: 0,
     }
 
     constructor(props) {
         super(props);
 
-        const { letters } = this.props.location.state;
-        const allowedLetters = letters === undefined ? localStorage.getItem('localAllowedLetters') : letters;
+        let routeState;
+        if (this.props.location.state) {
+            localStorage.setItem('routeState', JSON.stringify(this.props.location.state))
+            routeState = this.props.location.state
+        } else {
+            routeState = localStorage.getItem('routeState')
+            if (routeState) routeState = JSON.parse(routeState)
+        }
 
+       
         this.keyboard = React.createRef();
         this.isDisabled = true;
         this.wordsNumber = 8;
         this.lettersByWord = 5;
-        this.allowedLetters = allowedLetters;
-        localStorage.setItem('localAllowedLetters', allowedLetters);
-       
+        this.allowedLetters = routeState.letters;
+        this.intervalGameId = 0;
+        
     }
 
     componentDidMount() {
@@ -94,12 +102,12 @@ class Level extends React.Component {
         this.setState({ finalModalIsOpen: false })
     }
     handleOpenFinalModal = async e => {
+        clearInterval(this.intervalGameId);
         await this.setState({
             finalModalIsOpen: true,
             outFocusModalIsEnable: false
         })
     }
-
     handleKeyDown = e => {
         if (this.state.index < this.state.exercice.length) {
             let letters = [...this.state.exercice];
@@ -137,6 +145,16 @@ class Level extends React.Component {
         }
     }
 
+    handleStartGame = e => {
+        this.handleCloseStartModal();
+    
+            this.intervalGameId = setInterval(() => {
+                this.setState({
+                    timetaken: this.state.timetaken + 1,
+                })
+            }, 1000)
+    }
+
     getRandomNumbers(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -145,7 +163,7 @@ class Level extends React.Component {
 
     render() {
         return (
-            <div className="Level ">
+            <div className="level content_box">
                 <Modal
                     isOpen={this.state.startModalIsOpen}
                     onClose={this.handleCloseStartModal}
@@ -156,16 +174,16 @@ class Level extends React.Component {
 
 
                         <div>
+                            <button onClick={this.handleStartGame} className="">OK</button>
                             <Link to={'/exercises'}>Cancelar</Link>
-                            <button onClick={this.handleCloseStartModal} className="">OK</button>
                         </div>
 
                     </div>
                 </Modal>
                 <div className="content_box">
                     <div className="box"></div>
-                    <div className="box">
-                        <Exercice
+                    <div className="panel content_box">
+                        <ExerciseBox
                             exercice={this.state.exercice}
                         />
                         <TextBox
@@ -193,8 +211,9 @@ class Level extends React.Component {
                         <h1>Terminaste el ejercicio</h1>
                         <p>Este es tu puntaje:</p>
 
-                        <h3>Score: {this.state.score}</h3>
-                        <h3>PPM: 80</h3>
+                        <h3>Puntos: { this.state.score }</h3>
+                        <h3>Tiempo: { this.state.timetaken }</h3>
+                        {/* <h3>PPM: 80</h3> */}
 
                         <p>Te recomendamos repetir el nivel</p>
 
