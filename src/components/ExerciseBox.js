@@ -6,7 +6,7 @@ import Letter from "./Letter";
 function ExerciseBox(props) {
     return (
 
-        <div className="ExerciseBox">
+        <div className="exercise__box">
             {props.exercice.map((obj, index) => < Letter key={index} letter={obj.letter} color={obj.color} />)}
         </div>
 

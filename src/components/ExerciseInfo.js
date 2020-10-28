@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import "../styles/components/ExerciseInfo.css"
 
 function ExerciseInfo(props) {
-    const exercise = props.info
+    var exercise = props.info;
+
     return (
             <Link
                 to={{
@@ -14,8 +15,8 @@ function ExerciseInfo(props) {
                 }}
                 className="link-unstyled"
             >
-                <div className="exercise__info content_box" key={exercise.exerciseId}>
-                    <span className="exercise__title">Ejercicio {exercise.exerciseId}</span>
+                <div className="exercise__info content_box" key={exercise.id}>
+                    <span className="exercise__title">Ejercicio {exercise.id}</span>
                     <ul className="content_box">
                         {exercise.letters.map((letter, i) =>
                             <li key={i} className="list-unstyled">{letter}</li>
@@ -23,7 +24,6 @@ function ExerciseInfo(props) {
                     </ul>
                 </div>
             </Link>
-        
     )
 }
 

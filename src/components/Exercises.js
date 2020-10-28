@@ -6,24 +6,27 @@ import ExerciseInfo from "./ExerciseInfo";
 class Exercises extends React.Component {
     render() {
         return (
-            <React.Fragment>
-                <section className="section content_box">
-                    <div className="lesson ">
-                        <div className="lesson__title_header content_box">
-                            <span className="lesson__title">Línea Base</span>
-                        </div>
-                        <div className="gallery content_box">
-                            {Api.map((info) =>
-                                <ExerciseInfo info={info}/>
-                            )}
-                        </div>
 
-                    </div>
-                </section>
-
-            </React.Fragment>
+            <div className="section">
+                <div className="lessons__gallery">
+                    {Api.map((info, l) =>
+                        <React.Fragment key={l}>
+                            <div className="lesson__header">
+                                <span className="lesson__title">{info.lesson}</span>
+                            </div> 
+                            <div className="lesson__exersices">
+                                {info.exerciseList.map((info, i) =>
+                                        <ExerciseInfo info={info} key={i} />
+                                )}
+                            </div>
+                        </React.Fragment>
+                    )}
+                </div>
+            </div>
         )
     }
 }
 
 export default Exercises;
+
+
