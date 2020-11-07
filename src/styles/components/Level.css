@@ -1,21 +1,53 @@
 .level {
-
-    /* background-image: url("../../statics/robots2back.jpg"); */
-    /* background-image: url("../../statics/aliensback.jpg"); */
-     /* background-image: url("../../statics/alien.jpg"); */
-     /* background-image: url("../../statics/catback.jpg"); */
-     /* background-image: url("../../statics/cats2back.jpg"); */
-     /* background-image: url("../../statics/pandas.jpg"); */
-     /* background-image: url("../../statics/pandas2.jpg"); */
-     /* background-image: url("../../statics/donuts.png"); */
-     /* background-image: url("../../statics/hongos.jpg"); */
-     /* background-image: url("../../statics/gosth.jpg"); */
-    /* background-image: url("../../statics/robotback.jpg"); */
-    /* background-image: url("../../statics/spaceback.jpg"); */
-
+    background-image: url("../../statics/back30.JPG");
+    /* background-image: url("../../statics/back22.jpg"); */
+    /* background-image: url("../../statics/back27.jpg"); */
 }
 
-.panel { 
+.panel {  display: flex;
+
     flex-direction: column;
-    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+flex-grow: 3;
+}
+
+.panel__upside{
+    display: flex;
+    height: 50%;
+    width: 100%;
+   
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-content: center; */
+}
+.panel__downside{ 
+    display: flex;
+    height: 50%;
+    width: 100%;
+ 
+ flex-direction: column;
+}
+
+.boxy{
+  
+    align-self: center;
+}
+
+.modal__highlight_text{
+    font-weight: 800;
+}
+
+@keyframes start_level {
+    from {color: #e6e6ea;}
+    to {color: #f25067;}
+}
+.modal__start_level_text{
+    font-size: 17px;
+    animation-name: start_level;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.modal__title{
+    color: #3a4147;
 }

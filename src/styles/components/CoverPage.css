@@ -4,6 +4,10 @@
     background-image: url('../../statics/texture2.png');
     background-image: url('../../statics/texture2.png'), linear-gradient(to bottom, #B6DCFE, #20C4DC);
     background-image: url('../../statics/texture2.png'), -webkit-linear-gradient(to bottom, #B6DCFE, #20C4DC);
+    /* background: #B6DCFE;  
+    background-image: url('../../statics/texture2.png');
+    background-image: url('../../statics/texture2.png'), linear-gradient(to bottom, #B6DCFE, #20C4DC);
+    background-image: url('../../statics/texture2.png'), -webkit-linear-gradient(to bottom, #B6DCFE, #20C4DC); */
     /* background-repeat: no-repeat; */
     /* background-size: cover; */
     font-size: 100px;

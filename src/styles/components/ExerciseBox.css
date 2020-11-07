@@ -1,13 +1,15 @@
 .exercise__box {
-    width: 200px;
-    height: 80px;
+    width: 650px;
+    height: 100px;
     background-color: #EDF5FC;
-    border-radius: 15px;
+    /* border-radius: 15px; */
     border-width: 1px;
     margin-bottom: 20px;
     display: flex;
-    flex-wrap: wrap;
-    /* align-items: center; */
+    align-items: center;
+    font-family: 'Roboto Mono', monospace;
     /* justify-content: center; */
+    flex-wrap: wrap;
+    overflow: hidden;
 }
 

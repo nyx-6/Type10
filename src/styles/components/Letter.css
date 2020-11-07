@@ -10,10 +10,13 @@
 }
 
 .current{
-    color:#4f5764
+    /* color:#404752 */
+    color:#000
 }
 
 .letter {
+    
+    font-weight: 200;
     font-size: 15px;
     white-space:pre;
     height: 20px;

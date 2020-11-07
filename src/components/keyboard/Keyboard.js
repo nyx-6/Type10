@@ -91,12 +91,13 @@ function Keyboard(props) {
             >
                 <div className="">
 
-                    <h1>Deseas continuar</h1>
+                    <br/>
+                    <h3>¿Deseas continuar?</h3>
                    
 
                     <div>
-                        <button onClick={props.onClose} className="">Continuar</button>
-                        <Link to={'/exercises'}>Cancelar</Link>
+                        <button onClick={props.onClose} className="Modal__container_button">Si</button>
+                        <Link to={'/exercises'} className="link-unstyled Modal__container_button">No</Link>
                     </div>
 
                 </div>

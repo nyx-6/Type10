@@ -12,6 +12,7 @@ class Level extends React.Component {
         pressedKey: "",
         typedLetters: "",
         exercice: [],
+        totalLetters: 0,
         index: 0,
         currentExerciceLetter: "",
         score: 0,
@@ -19,7 +20,7 @@ class Level extends React.Component {
         startModalIsOpen: false,
         outFocusModalIsOpen: false,
         outFocusModalIsEnable: false,
-        timetaken: 0,
+        takenTime: 0,
     }
 
     constructor(props) {
@@ -34,26 +35,37 @@ class Level extends React.Component {
             if (routeState) routeState = JSON.parse(routeState)
         }
 
-       
+
         this.keyboard = React.createRef();
+        this.startExercise = React.createRef();
+
         this.isDisabled = true;
-        this.wordsNumber = 8;
+        this.wordsNumber = 24;
         this.lettersByWord = 5;
         this.allowedLetters = routeState.letters;
         this.intervalGameId = 0;
-        
+        this.accuracy = 0;
+        this.wpm = 0;
+        this.productivity = 0;
+        this.score = 0;
+        this.typingLevel = "none";
+        this.exerciseStatus = "notStarted";
     }
-
     componentDidMount() {
         this.generateExercice();
         this.handleOpenStartModal();
     }
-
+    componentWillUnmount() {
+        clearInterval(this.intervalGameId);
+    }
     setFocusOnKeyBoard = () => {
         this.keyboard.current.focus();
         //console.log(document.activeElement);
     }
-
+    setFocusOnstartExerciseButton = () => {
+        this.startExercise.current.focus();
+        console.log(document.activeElement);
+    }
     generateExercice = () => {
 
         const max = this.allowedLetters.length - 1;
@@ -75,21 +87,24 @@ class Level extends React.Component {
         exercice.pop()
 
         this.setState({
-            exercice
+            exercice,
+            totalLetters: exercice.length
         })
     }
-
     handleCloseStartModal = e => {
         this.setState({ startModalIsOpen: false })
         this.setFocusOnKeyBoard();
     }
     handleOpenStartModal = async e => {
+
         await this.setState({
             startModalIsOpen: true,
             outFocusModalIsEnable: true
         })
+        this.setFocusOnstartExerciseButton();
     }
     handleCloseOutFocusModal = async e => {
+
         await this.setState({ outFocusModalIsOpen: false })
         this.setFocusOnKeyBoard();
     }
@@ -103,6 +118,10 @@ class Level extends React.Component {
     }
     handleOpenFinalModal = async e => {
         clearInterval(this.intervalGameId);
+        this.calculateAccuracy();
+        this.calculateWPM();
+        this.calculateProductivity();
+        this.calculateTypingLevel();
         await this.setState({
             finalModalIsOpen: true,
             outFocusModalIsEnable: false
@@ -110,58 +129,102 @@ class Level extends React.Component {
     }
     handleKeyDown = e => {
         if (this.state.index < this.state.exercice.length) {
-            let letters = [...this.state.exercice];
+            if (e.key.length === 1) {
+                let letters = [...this.state.exercice];
 
-            this.setState({
-                pressedKey: e.key,
-                typedLetters: this.state.typedLetters + e.key,
-                currentExerciceLetter: letters[this.state.index].letter,
-            });
+                this.setState({
+                    pressedKey: e.key,
+                    typedLetters: this.state.typedLetters + e.key,
+                    currentExerciceLetter: letters[this.state.index].letter,
+                });
+            }
         }
     }
-
     handleKeyUp = e => {
         this.setState({
             pressedKey: "",
         });
 
         if (this.state.index < this.state.exercice.length) {
+            if (e.key.length === 1) {
+                const exercise = [...this.state.exercice]
+                const isWrong = this.state.pressedKey !== this.state.currentExerciceLetter
 
-            const exercise = [...this.state.exercice]
-            const isWrong = this.state.pressedKey !== this.state.currentExerciceLetter
+                exercise[this.state.index].color = isWrong ? 'wrong' : 'ok'
+                const point = isWrong ? 0 : 1
 
-            exercise[this.state.index].color = isWrong ? 'wrong' : 'ok'
-            const point = isWrong ? 0 : 1
+                this.score = this.score + point;
 
-            this.setState({
-                exercise,
-                index: this.state.index + 1,
-                score: this.state.score + point,
-            })
+                this.setState({
+                    exercise,
+                    index: this.state.index + 1,
+                })
 
-            if (this.state.index === this.state.exercice.length - 1) {
-                this.handleOpenFinalModal();
+                if (this.state.index === this.state.exercice.length - 1) {
+                    this.handleOpenFinalModal();
+                }
             }
         }
     }
-
     handleStartGame = e => {
         this.handleCloseStartModal();
-    
-            this.intervalGameId = setInterval(() => {
-                this.setState({
-                    timetaken: this.state.timetaken + 1,
-                })
-            }, 1000)
-    }
 
+        this.exerciseStatus = "unfinished";
+
+
+        this.intervalGameId = setInterval(() => {
+            this.setState({
+                takenTime: this.state.takenTime + 1,
+            })
+        }, 1000)
+    }
     getRandomNumbers(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
+    calculateAccuracy() {
+        console.log(`score ${this.score} total Letters ${this.state.totalLetters}`);
+        this.accuracy = ((this.score / this.state.totalLetters) * 100).toFixed(2);
+    }
+    calculateWPM() {
+        console.log(`s ${this.state.takenTime} m ${this.state.takenTime / 60}`);
+        this.wpm = Math.round((this.state.totalLetters / 5) / (this.state.takenTime / 60));
+    }
+    calculateProductivity() {
+
+        const errors = (this.score) / 5;
+        const m = this.state.takenTime / 60;
+        console.log(errors);
+        this.productivity = Math.round(errors / m);
+    }
+
+    calculateTypingLevel() {
+
+        let exerciseStatus = "unfinished";
+
+        if (this.wpm <= 35 || this.accuracy < 93) {
+            this.typingLevel = "Principiante"
+            exerciseStatus = "repeat"
+        } else
+            if (this.wpm >= 36 && this.wpm <= 45) {
+                this.typingLevel = "Intermedio"
+                exerciseStatus = "goodenough"
+            } else
+                if (this.wpm >= 46 && this.wpm <= 65) {
+                    this.typingLevel = "Avanzado"
+                    exerciseStatus = "finished"
+                } else
+                    if (this.wpm > 65) {
+                        this.typingLevel = "Legendario"
+                        exerciseStatus = "finished"
+                    }
+
+        this.exerciseStatus = exerciseStatus
+    }
 
     render() {
+
         return (
             <div className="level content_box">
                 <Modal
@@ -169,36 +232,58 @@ class Level extends React.Component {
                     onClose={this.handleCloseStartModal}
                 >
                     <div className="">
-
-                        <h1>Iniciar</h1>
-
-
+                        <br/>
+                        <h2 className="modal__title">Ejercicio <span className="red">1</span></h2>
+                        <h3></h3>
+                        <p className="text">Dato1: blablal   Dato2: jsdcjksbdjc  Dato3: jsdhjshd </p>
+                        
+                        <br/>
+                        <div className="modal__start_level_text">¡Presiona <span className="modal__highlight_text">espacio</span> para comenzar!</div>
+                        
+                        <br/>
+                        <br/>
                         <div>
-                            <button onClick={this.handleStartGame} className="">OK</button>
-                            <Link to={'/exercises'}>Cancelar</Link>
+                            <button  
+                                ref={this.startExercise}
+                                onClick={this.handleStartGame}
+                                className="Modal__container_button">
+                                Comenzar
+                            </button>
+                            <Link to={'/exercises'} className="link-unstyled Modal__container_button">Regresar</Link>
                         </div>
 
                     </div>
                 </Modal>
                 <div className="content_box">
                     <div className="box"></div>
-                    <div className="panel content_box">
-                        <ExerciseBox
-                            exercice={this.state.exercice}
-                        />
-                        <TextBox
-                            disabledInputText={this.isDisabled}
-                            typedLetters={this.state.typedLetters}
-                        />
-                        <Keyboard
-                            keyboardRef={this.keyboard}
-                            keyDown={this.handleKeyDown}
-                            keyUp={this.handleKeyUp}
-                            pressedKey={this.state.pressedKey}
-                            outFocus={this.handleOpenOutFocusModal}
-                            isOpen={this.state.outFocusModalIsOpen}
-                            onClose={this.handleCloseOutFocusModal}
-                        />
+                    <div className="panel box">
+
+                        <div className="panel__upside">
+                            <div className="boxy">
+                            <ExerciseBox
+                                exercice={this.state.exercice}
+                            />
+                            <TextBox
+                                disabledInputText={this.isDisabled}
+                                typedLetters={this.state.typedLetters}
+                            />
+
+                          </div>
+                        </div>
+                        <div className="panel__downside">
+                        <div className="boxy">
+                            <Keyboard
+                                keyboardRef={this.keyboard}
+                                keyDown={this.handleKeyDown}
+                                keyUp={this.handleKeyUp}
+                                pressedKey={this.state.pressedKey}
+                                outFocus={this.handleOpenOutFocusModal}
+                                isOpen={this.state.outFocusModalIsOpen}
+                                onClose={this.handleCloseOutFocusModal}
+                            />
+
+                        </div>
+                        </div>
                     </div>
                     <div className="box"></div>
                 </div>
@@ -207,24 +292,44 @@ class Level extends React.Component {
                     onClose={this.handleCloseFinalModal}
                 >
                     <div className="">
+                        <br/>
+                        <h1 className="modal__title">¡Terminaste!</h1>
+                        <h3 className="modal__title">Estadísticas:</h3>
 
-                        <h1>Terminaste el ejercicio</h1>
-                        <p>Este es tu puntaje:</p>
+                        <h5 className="modal__title">Time: {this.state.takenTime} </h5>
+                        <h5 className="modal__title">Precisión: {this.accuracy}% </h5>
+                        <h5 className="modal__title">Velocidad: {this.wpm} PPM</h5>
+                        <h5 className="modal__title">Nivel: {this.typingLevel}</h5>
 
-                        <h3>Puntos: { this.state.score }</h3>
-                        <h3>Tiempo: { this.state.timetaken }</h3>
-                        {/* <h3>PPM: 80</h3> */}
+                        {this.wpm < 36 || this.accuracy < 96 ?
+                            <p className="text">Te recomendamos repetir el nivel para mejorar tu precisión y velocidad</p> :
 
-                        <p>Te recomendamos repetir el nivel</p>
-
-                        <div>
-                            <a href="/level">Repetir</a>
-                            <Link to={'/exercises'}>Siguiente</Link>
-                        </div>
+                            (this.wpm > 36 && this.wpm < 46) || this.accuracy < 96 ?
+                                <p className="text"> Puedes seguir practicando para alcanzar el nivel avanzado
+                                    o pasar al siguiente ejercicio</p> :
+                                <p className="text">Ya dominas este ejercicio puedes pasar al siguiente ejercicio</p>
+                        }
+                            <br/>
+                        {
+                            this.exerciseStatus === "repeat" ?
+                                <div>
+                                    <a href="/level" className="link-unstyled Modal__container_button">Repetir</a>
+                                    <Link to={'/exercises'} className="link-unstyled Modal__container_button">Regresar</Link>
+                                </div> : this.exerciseStatus === "goodenough" ?
+                                    <div>
+                                        <a href="/level" className="link-unstyled Modal__container_button">Repetir</a>
+                                        <Link to={'/exercises'} className="link-unstyled Modal__container_button">Siguiente</Link>
+                                        <Link to={'/exercises'} className="link-unstyled Modal__container_button">Regresar</Link>
+                                    </div> : this.exerciseStatus === "finished" ?
+                                        <div>
+                                            <Link to={'/exercises'} className="link-unstyled Modal__container_button">Siguiente</Link>
+                                            <Link to={'/exercises'} className="link-unstyled Modal__container_button">Regresar</Link>
+                                        </div> : <Link to={'/exercises'} className="">Regresar</Link>
+                        }
 
                     </div>
                 </Modal>
-            </div>
+            </div >
         )
     }
 }

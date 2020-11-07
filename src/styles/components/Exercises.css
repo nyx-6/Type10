@@ -4,38 +4,34 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-    align-items: center;
     background: #FFF9FB;  
+    background-image: url("../../statics/back27.jpg");
     flex: 1;
 }
 
 .lessons__gallery {
     width: 75%;
     height: 100%;
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around; */
     position: fixed;
-    top: 60px;
+    top: 50px;
     scroll-behavior: smooth;
     overflow-y: scroll;
-    scrollbar-color: #FF6663 #081825;
-    background-color: #081825;
-    background-image: url("../../statics/back11.JPG");
-
+    scrollbar-color: #081825 rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .lesson__header {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 70px;
+    height: 100px;
 }
 
 .lesson__title {
-    font-size: 35px;
+    font-size: 45px;
     font-weight: 900;
-    color: #58FCEC;
+    color: #f25067;
+    
 }
 
 .lesson__exersices{
@@ -44,4 +40,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.menu__lessons{
+    height: 300px;
+    width: 30px;
+    margin-left: 10px;
+    background-color: plum;
+    align-self: baseline ;
 }
