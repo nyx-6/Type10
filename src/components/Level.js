@@ -234,7 +234,7 @@ class Level extends React.Component {
                     <div className="">
                         <br/>
                         <h2 className="modal__title">Ejercicio <span className="red">1</span></h2>
-                        <h3></h3>
+                       
                         <p className="text">Dato1: blablal   Dato2: jsdcjksbdjc  Dato3: jsdhjshd </p>
                         
                         <br/>
