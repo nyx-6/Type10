@@ -44,7 +44,7 @@ flex-grow: 3;
 .modal__start_level_text{
     font-size: 17px;
     animation-name: start_level;
-    animation-duration: 2s;
+    animation-duration: 1s;
     animation-iteration-count: infinite;
 }
 

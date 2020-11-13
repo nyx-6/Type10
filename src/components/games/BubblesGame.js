@@ -25,11 +25,11 @@ class BubblesGame extends React.Component {
 
         this.gameArea = React.createRef();
         this.intervalGameTime = 0;
+        this.intervalGameBubbles = 0;
         this.intervalGame = 0;
         this.gameMusic = new Audio(GameMusic);
         this.lbubbleSound = new Audio(LostBubbleSound);
         this.popSound = new Audio(PopSound);
-        this.generateBubbles = false;
         this.popBubble = this.popBubble.bind(this);
         this.POINT = 1;
     }
@@ -39,7 +39,10 @@ class BubblesGame extends React.Component {
 
     }
     componentWillUnmount() {
-
+        clearInterval(this.intervalGame);
+        clearInterval(this.intervalGameTime);
+        clearInterval(this.intervalGameBubbles);
+        this.gameMusic.pause();
     }
 
     handleCloseStartGameModal = e => {
@@ -114,8 +117,6 @@ class BubblesGame extends React.Component {
 
         this.handleCloseStartGameModal();
         this.gameMusic.play();
-        this.generateBubbles = true;
-     
 
         this.intervalGameTime = setInterval(() => {
 
@@ -125,7 +126,7 @@ class BubblesGame extends React.Component {
 
         }, 1000);
 
-        this.intervalGame = setInterval(() => {
+        this.intervalGameBubbles = setInterval(() => {
             let bubbles = [...this.state.bubbles];
             let bubble = this.createBubble();
             bubbles.push(bubble);
@@ -136,9 +137,9 @@ class BubblesGame extends React.Component {
 
         }, 700);
 
-        setTimeout(() => {
+        this.intervalGame = setTimeout(() => {
             clearInterval(this.intervalGameTime);
-            clearInterval(this.intervalGame);
+            clearInterval(this.intervalGameBubbles);
             this.handleOpenEndGameModal();
             this.gameMusic.pause();
             this.gameMusic.currentTime = 0;
@@ -152,7 +153,7 @@ class BubblesGame extends React.Component {
         for (let i = 0; i < bubbles.length; i++) {
             let bubble = bubbles[i];
 
-            if (bubble.props.bubbleLetter === e.key) {
+            if (bubble.props.bubbleLetter === e.key.toUpperCase()) {
                
                 this.popBubble(bubble.props.bubbleId)
                 this.popSound.play();
@@ -162,7 +163,6 @@ class BubblesGame extends React.Component {
             
         }
     }
-
 
     render() {
 
@@ -186,7 +186,6 @@ class BubblesGame extends React.Component {
 
                 <div className="game__area" tabIndex="0" ref={this.gameArea}
                      onKeyDown={this.handleKeyDown}
-                    //  onKeyUp={this.handleKeyUp}
                 >
                 </div>
 

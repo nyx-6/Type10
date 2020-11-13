@@ -7,6 +7,7 @@ import Cover from './components/CoverPage';
 import Exercises from './components/Exercises';
 import Level from './components/Level';
 import BubblesGame from './components/games/BubblesGame';
+import BoomGame from './components/games/BoomGame';
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
             </div>
 
             <div className="right__side_nav content_box">
-              <li className="menu__option"><Link to={'/bubblesgame'} className="menu__link">Juego</Link></li>
+              <li className="menu__option"><Link to={'/boomgame'} className="menu__link">Mini Juegos</Link></li>
+              <li className="menu__option"><Link to={'/bubblesgame'} className="menu__link">Burbujas</Link></li>
               <li className="menu__option"><Link to={'/start'} className="menu__link">Instrucciones</Link></li>
               <li className="menu__option"><Link to={'/exercises'} className="menu__link">Ejercicios</Link></li>
             </div>
@@ -41,6 +43,7 @@ function App() {
           <Route path='/exercises' component={Exercises} />
           <Route path='/level' component={Level} />
           <Route path='/bubblesgame' component={BubblesGame} />
+          <Route path='/boomgame' component={BoomGame} />
         </Switch>
 
       </Router>

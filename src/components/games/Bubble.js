@@ -3,19 +3,13 @@ import '../../styles/components/Bubble.css'
 
 class Bubble extends React.Component {
 
-    // constructor(props) {
-    //     super(props);
-    // }
-
     onAnimationStart = e => {
 
-        // console.log(`Burbuja ${this.props.bubbleId}, creada`);
+     
 
     };
 
     onAnimationEnd = e => {
-
-        // console.log(`Burbuja ${this.props.bubbleId}, eliminada`);
         this.props.popBubble(this.props.bubbleId);
         this.props.lostBubbleSound.play();
     };
