@@ -65,7 +65,7 @@ class BoomGame extends React.Component {
         this.gameIntervalId = "";
         this.deviceSystem = "";
         this.objectiveSystemTimerIntervalId = "";
-        this.passworsNumber = 8;
+        this.passworsNumber = 6;
         this.keyLetters = ['F', 'J'];
         this.wordsNumber = 5;
         this.letterByWord = 4;

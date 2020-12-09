@@ -134,7 +134,7 @@ class Level extends React.Component {
 
                 this.setState({
                     pressedKey: e.key,
-                    typedLetters: this.state.typedLetters + e.key,
+                    typedLetters: this.state.typedLetters + e.key.toUpperCase(),
                     currentExerciceLetter: letters[this.state.index].letter,
                 });
             }
@@ -148,7 +148,7 @@ class Level extends React.Component {
         if (this.state.index < this.state.exercice.length) {
             if (e.key.length === 1) {
                 const exercise = [...this.state.exercice]
-                const isWrong = this.state.pressedKey !== this.state.currentExerciceLetter
+                const isWrong = this.state.pressedKey.toUpperCase() !== this.state.currentExerciceLetter
 
                 exercise[this.state.index].color = isWrong ? 'wrong' : 'ok'
                 const point = isWrong ? 0 : 1
