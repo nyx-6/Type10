@@ -1,15 +1,15 @@
 import React from "react";
-import "../styles/components/Start.css";
+import "../styles/components/Instructions.css";
 import keyboard from "../statics/keyboard.png"
 import colorKeyboard from "../statics/keyboard2.png"
 import leftHand from "../statics/lefthand.png"
 import rightHand from "../statics/righthand.png"
 
 
-function Start() {
+function Instructions() {
     return (
-        // <div className="Start">
-            <div className="Start content_box">
+        // <div className="Instructions">
+            <div className="Instructions content_box">
                 <div className="tier content_box">
                     <span className="title">¿Qué es Type10?</span>
 
@@ -113,4 +113,4 @@ function Start() {
     );
 }
 
-export default Start;
+export default Instructions;

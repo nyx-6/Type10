@@ -4,7 +4,7 @@ import "../styles/components/CoverPage.css";
 
 function CoverPage() {
     return (
-        <div className="cover__page content_box">
+        <div className="cover__page">
             <span className="red">M</span><span className="white">ecanografía</span>
         </div>
 

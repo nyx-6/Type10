@@ -1,18 +1,12 @@
 .cover__page {
-    height: 100vh;
+    height: 100%;
     background: #B6DCFE;  
     background-image: url('../../statics/texture2.png');
     background-image: url('../../statics/texture2.png'), linear-gradient(to bottom, #B6DCFE, #20C4DC);
     background-image: url('../../statics/texture2.png'), -webkit-linear-gradient(to bottom, #B6DCFE, #20C4DC);
-    /* background: #B6DCFE;  
-    background-image: url('../../statics/texture2.png');
-    background-image: url('../../statics/texture2.png'), linear-gradient(to bottom, #B6DCFE, #20C4DC);
-    background-image: url('../../statics/texture2.png'), -webkit-linear-gradient(to bottom, #B6DCFE, #20C4DC); */
-    /* background-repeat: no-repeat; */
-    /* background-size: cover; */
     font-size: 100px;
     font-weight: 700;
-    /* display: flex; */
+    display: flex;
     align-items: center;
     justify-content: center;
 }

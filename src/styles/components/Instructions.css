@@ -1,18 +1,18 @@
-.Start {
+.Instructions {
   height: 100%;
   flex-wrap: wrap;
   position: relative;
 }
 
-div.Start div.content_box:first-child {
+div.Instructions div.content_box:first-child {
   padding-left: 15px;
 } 
 
-div.Start div.content_box:last-child {
+div.Instructions div.content_box:last-child {
   padding-right: 15px;
 } 
 
-div.Start div.content_box:not(:last-child) {
+div.Instructions div.content_box:not(:last-child) {
   padding-right: 10px;
 }
 

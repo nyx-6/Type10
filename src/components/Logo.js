@@ -1,13 +1,17 @@
 import React from "react";
 import '../styles/components/Logo.css'
 
+import { Link } from 'react-router-dom';
+
 
 function Logo() {
     return (
-        <div className="logo content_box">
-            <span className="red">Type</span>
-            <span className="white">10</span>
-        </div>
+        <li >
+            <Link to={'/'} className="menu__link logo">
+                <span className="red">Type</span>
+                <span className="white">10</span>
+            </Link>
+        </li>
     );
 }
 

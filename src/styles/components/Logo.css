@@ -1,5 +1,7 @@
 .logo {
-    font-size: 2vh;
+    font-size: 3vh;
     font-weight: 600;
     align-items: center;
+    display: flex;
+    text-decoration: none;
 }
