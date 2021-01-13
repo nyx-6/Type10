@@ -8,8 +8,7 @@ Can you type fast enough?
 
 Type10 is a typing web app that will help you to improve
 your typing speed and precision, using all your fingers.<br/>   
-
-Type10 is perfect for everyone who wants to get a job that 
+This project is perfect for everyone who wants to get a job that 
 requires good typing skills or just for personal growth.
 
 ### `Type10 will be constantly improved`
