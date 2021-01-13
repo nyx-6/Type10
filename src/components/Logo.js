@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function Logo() {
     return (
         <li >
-            <Link to={'/'} className="menu__link logo">
+            <Link to={'/Type10'} className="menu__link logo">
                 <span className="red">Type</span>
                 <span className="white">10</span>
             </Link>
