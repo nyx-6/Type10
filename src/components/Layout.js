@@ -17,7 +17,7 @@ function Layout() {
             <div className="container">
                 {/* <div className="header_space"></div> */}
                 <Switch>
-                    <Route exact path='/' component={Cover} />
+                    <Route exact path='/Type10' component={Cover} />
                     <Route path='/instructions' component={Instructions} />
                     <Route path='/exercises' component={Exercises} />
                     <Route path='/level' component={Level} />
