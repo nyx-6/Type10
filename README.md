@@ -1,4 +1,4 @@
-Created by nyx
+Created by ⬤nyx
 
 ## Type10
 
@@ -6,13 +6,13 @@ Can you type fast enough?
 
 ### `What is it?`
 
-Type10 is a typing online web app that will help you to improve
-your typing speed and precision using all your fingers.<br/>   
+Type10 is a typing web app that will help you to improve
+your typing speed and precision, using all your fingers.<br/>   
 
 Type10 is perfect for everyone who wants to get a job that 
-requires good typing skills. 
+requires good typing skills or just for personal growth.
 
-### `Type10 will be improved constantly`
+### `Type10 will be constantly improved`
 
 **Note: This project is not finished**
 
