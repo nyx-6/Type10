@@ -1,10 +1,12 @@
 .gameArea {
-    height: 100vh;
+    display: flex;
+    height: 100%;
     width: 100%;
     flex-wrap: wrap;
     font-family: 'Roboto Mono', monospace;
     font-weight: 300;
     overflow: hidden;
+    outline: none;
 }
 
 .screen__of  {
@@ -158,6 +160,7 @@ span.uiCam {
     font-size: 20px;
     font-weight: 700;
     white-space:pre;
+    outline: none;
 }
 
 .password{

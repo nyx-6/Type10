@@ -15,6 +15,7 @@ import foundObjective from '../../statics/sounds/foundit.mp3'
 import correctSound from '../../statics/sounds/correct.mp3'
 import wrongSound from '../../statics/sounds/wrong.mp3'
 import winSound from '../../statics/sounds/win.mp3'
+import { Link } from 'react-router-dom';
 
 
 class BoomGame extends React.Component {
@@ -45,6 +46,11 @@ class BoomGame extends React.Component {
         connectionLost: "",
         startGameModalIsOpend: false,
         endGameModalIsOpend: false,
+        outFocusModalIsOpen: false,
+        outFocusModalIsEnable: false,
+        dificulty: 'easy',
+        finishOnTime: true,
+
     }
 
     constructor(props) {
@@ -65,7 +71,7 @@ class BoomGame extends React.Component {
         this.gameIntervalId = "";
         this.deviceSystem = "";
         this.objectiveSystemTimerIntervalId = "";
-        this.passworsNumber = 6;
+        this.passworsNumber = 4;
         this.keyLetters = ['F', 'J'];
         this.wordsNumber = 5;
         this.letterByWord = 4;
@@ -73,7 +79,7 @@ class BoomGame extends React.Component {
 
     componentDidMount() {
         this.handleOpenStartGameModal();
-      
+
     }
 
     componentWillUnmount() {
@@ -86,13 +92,30 @@ class BoomGame extends React.Component {
 
 
     handleCloseStartGameModal = e => {
+        this.setGameConfig();
         this.setState({ startGameModalIsOpend: false });
         this.startGame();
     }
 
     handleOpenStartGameModal = async e => {
-        await this.setState({ startGameModalIsOpend: true, })
+        await this.setState({
+            startGameModalIsOpend: true,
+        });
+
     }
+
+    handleCloseOutFocusGameModal = async e => {
+
+        await this.setState({ outFocusModalIsOpen: false })
+        this.gameWrittingArea.current.focus();
+    }
+
+    handleOpenOutFocusGameModal = async e => {
+        if (this.state.outFocusModalIsEnable) {
+            await this.setState({ outFocusModalIsOpen: true })
+        }
+    }
+
 
     handleCloseEndGameModal = e => {
         this.setState({ endGameModalIsOpend: false })
@@ -100,7 +123,10 @@ class BoomGame extends React.Component {
 
     handleOpenEndGameModal = async e => {
 
-        await this.setState({ endGameModalIsOpend: true, })
+        await this.setState({
+            endGameModalIsOpend: true,
+            outFocusModalIsEnable: false,
+        })
     }
 
     startTime() {
@@ -187,6 +213,7 @@ class BoomGame extends React.Component {
             systemKeyBoard: "systemKeyBoard",
             cursor: "cursor",
             locksList: locksList,
+            outFocusModalIsEnable: true,
         })
         this.gameWrittingArea.current.focus();
         this.deviceSystem = "K-B00N_9 SYSTEM";
@@ -218,7 +245,8 @@ class BoomGame extends React.Component {
                     systemKeyBoard: "",
                     cursor: "",
                     connectionLost: "...Conexión perdida",
-                    currentPassword: ""
+                    currentPassword: "",
+                    finishOnTime: false,
                 })
                 setTimeout(() => {
                     this.handleOpenEndGameModal();
@@ -248,12 +276,13 @@ class BoomGame extends React.Component {
     }
 
     generatePassword() {
-        let passwordNew = this.generateExercise(0, 1);
+        let max = this.keyLetters.length - 1;
+        let passwordNew = this.generateExercise(0, max);
 
         this.setState({
             currentPassword: "",
             passwordCount: this.state.passwordCount + 1,
-           // eslint-disable-next-line
+            // eslint-disable-next-line
             currentPassword: passwordNew
         })
     }
@@ -264,6 +293,34 @@ class BoomGame extends React.Component {
 
     getLock(type_lock) {
         return <span className="material-icons">{type_lock}</span>
+    }
+
+    setGameConfig() {
+        switch (this.state.dificulty) {
+            case 'easy':
+                this.passworsNumber = 4;
+                this.keyLetters = ['F', 'J'];
+                break;
+            case 'normal':
+                this.passworsNumber = 6;
+                this.keyLetters = ['A', 'S', 'D', 'F', 'J', 'K', 'L', 'Ñ'];
+                break;
+            case 'hard':
+                this.passworsNumber = 8;
+                this.keyLetters = ['A', 'S', 'D', 'F', 'J', 'K', 'L', 'Ñ', 'G', 'H'];
+                break;
+            default:
+                this.passworsNumber = 4;
+                this.keyLetters = ['F', 'J'];
+                break;
+        }
+
+    }
+
+    handleOnChangeDificulty = e => {
+        this.setState({
+            dificulty: e.target.value,
+        })
     }
 
     showInstructions = () => {
@@ -309,50 +366,50 @@ class BoomGame extends React.Component {
 
     handleKeyDown = e => {
 
-        
 
-            if (e.key.length === 1 && this.state.userPasword.length < 24) {
-                this.setState({ userPasword: this.state.userPasword + e.key.toUpperCase() });
-            }
 
-            if (e.key === "Enter" && this.state.userPasword.length <= 24) {
-                if (this.state.currentPassword === this.state.userPasword) {
+        if (e.key.length === 1 && this.state.userPasword.length < 24) {
+            this.setState({ userPasword: this.state.userPasword + e.key.toUpperCase() });
+        }
 
-                    this.correctSound.play();
-                    let locksList = [...this.state.locksList];
+        if (e.key === "Enter" && this.state.userPasword.length <= 24) {
+            if (this.state.currentPassword === this.state.userPasword) {
 
-                    locksList.pop();
-                    locksList.unshift(this.getLock("lock"));
-                    locksList.shift();
-                    locksList.unshift(this.getLock("lock_open"));
+                this.correctSound.play();
+                let locksList = [...this.state.locksList];
 
-                    this.setState({ locksList: locksList });
+                locksList.pop();
+                locksList.unshift(this.getLock("lock"));
+                locksList.shift();
+                locksList.unshift(this.getLock("lock_open"));
 
-                    if (this.state.passwordCount < this.passworsNumber) {
-                        this.generatePassword();
-                    }
-                    if (this.state.passwordCount === this.passworsNumber) {
-                        clearInterval(this.objectiveSystemTimerIntervalId);
-                        this.gameWrittingArea.current.blur();
-                        this.gameMusic.pause();
-                        this.setState({
-                            objective: "",
-                            currentPassword: "Misión Cumplida!!",
-                            cursor: "",
-                        });
-                        this.winSound.play();
-                        setTimeout(() => {
-                            this.handleOpenEndGameModal();
-                        }, 1000);
+                this.setState({ locksList: locksList });
 
-                    }
-
-                } else {
-                    this.wrongSound.play();
+                if (this.state.passwordCount < this.passworsNumber) {
+                    this.generatePassword();
                 }
-                this.setState({ userPasword: "" })
+                if (this.state.passwordCount === this.passworsNumber) {
+                    clearInterval(this.objectiveSystemTimerIntervalId);
+                    this.gameWrittingArea.current.blur();
+                    this.gameMusic.pause();
+                    this.setState({
+                        objective: "",
+                        currentPassword: "Misión Cumplida!!",
+                        cursor: "",
+                    });
+                    this.winSound.play();
+                    setTimeout(() => {
+                        this.handleOpenEndGameModal();
+                    }, 1000);
+
+                }
+
+            } else {
+                this.wrongSound.play();
             }
-       
+            this.setState({ userPasword: "" })
+        }
+
     }
 
     startGame = () => {
@@ -364,14 +421,49 @@ class BoomGame extends React.Component {
 
     render() {
         return (
-            <div className="content_box gameArea">
+            <div className="gameArea"
+                onBlur={this.handleOpenOutFocusGameModal}>
                 <Modal
                     isOpen={this.state.startGameModalIsOpend}
                     onClose={this.handleCloseStartGameModal}
                 >
                     <br />
-                    <p>¡Reto!</p>
+                    <h3>Hacker hero</h3>
+                    <h4>¡Reto!</h4>
+                    <p>
+                        Hackea a la bomba y salva a la ciudad.<br />
+                        Ingresa todos los códigos de desactivación antes
+                        de que se termine el tiempo.
+                    </p>
+                    <div className="bubblesGame__config">
+                        <div className="bubblesGame__config_container">
+                            <h4>Dificultad</h4>
+                            <div>
+                                <input type="radio" id="easy" name="dificulty" value="easy"
+                                    onChange={this.handleOnChangeDificulty}
+                                    checked={this.state.dificulty === "easy"} />
+                                <label htmlFor="easy">Fácil</label><br />
+
+                                <input type="radio" id="normal" name="dificulty" value="normal"
+                                    onChange={this.handleOnChangeDificulty}
+                                    checked={this.state.dificulty === "normal"} />
+                                <label htmlFor="normal">Normal</label><br />
+
+                                <input type="radio" id="hard" name="dificulty" value="hard"
+                                    onChange={this.handleOnChangeDificulty}
+                                    checked={this.state.dificulty === "hard"} />
+                                <label htmlFor="hard">Difícil</label><br />
+                            </div>
+                        </div>
+                        <div className="bubblesGame__config_container">
+                            <h4>Linea Base</h4>
+                            <span>ASDFG HJKLÑ</span>
+                        </div>
+                    </div>
+
                     <button className="Modal__container_button" onClick={this.handleCloseStartGameModal}><span>Iniciar</span></button>
+                    <Link to={'/Type10'} className="link-unstyled Modal__container_button">Salir</Link>
+
                 </Modal>
                 <div className={this.state.screen0}>
                     <div className="setInstuctions">
@@ -420,18 +512,39 @@ class BoomGame extends React.Component {
                         <span className="uiCam" style={{ visibility: this.state.uiMiniCam }}>{this.state.dateTime}</span>
                     </div>
                 </div>
+
+                <Modal
+                    isOpen={this.state.outFocusModalIsOpen}
+                    onClose={this.handleCloseOutFocusGameModal}
+                >
+                    <div className="">
+
+                        <br />
+                        <h3>¿Deseas continuar?</h3>
+
+
+                        <div>
+                            <button onClick={this.handleCloseOutFocusGameModal} className="Modal__container_button">Si</button>
+                            <Link to={'/Type10'} className="link-unstyled Modal__container_button">No</Link>
+                        </div>
+
+                    </div>
+                </Modal>
                 <Modal
                     isOpen={this.state.endGameModalIsOpend}
                     onClose={this.handleCloseEndGameModal}
                 >
                     <br />
-                    <p>¡Terminaste!</p>
-                    <button className="Modal__container_button" onClick={this.handleCloseEndGameModal}><span>Ok</span></button>
+                    <h3>{this.state.finishOnTime ? "¡Reto cumplido!" : "Intenta de nuevo"}</h3>
+                    {/* <span>{`Puntaje: ${this.state.score} / ${this.challenge}`}</span> */}
+                    <br />
+                    <br />
+                    <Link to={'/Type10'} className="link-unstyled Modal__container_button">Salir</Link>
+                    <a href="/boomgame" className="link-unstyled Modal__container_button">Repetir</a>
                 </Modal>
             </div>
         )
     }
 }
-
 
 export default BoomGame; 
