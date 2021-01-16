@@ -3,5 +3,6 @@
     height: 250px;
     display: flex;
     flex-direction: column;
+    outline: none;
 }
 
