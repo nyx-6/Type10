@@ -286,7 +286,7 @@ class BubblesGame extends React.Component {
                     </div>
 
                     <button className="Modal__container_button" onClick={this.handleStartGame}><span>Iniciar</span></button>
-                    <Link to={'/Type10'} className="link-unstyled Modal__container_button">Salir</Link>
+                    <Link to={'/'} className="link-unstyled Modal__container_button">Salir</Link>
                 </Modal>
 
                 <div className="game__score_board">
@@ -315,7 +315,7 @@ class BubblesGame extends React.Component {
 
                         <div>
                             <button onClick={this.handleCloseOutFocusGameModal} className="Modal__container_button">Si</button>
-                            <Link to={'/Type10'} className="link-unstyled Modal__container_button">No</Link>
+                            <Link to={'/'} className="link-unstyled Modal__container_button">No</Link>
                         </div>
 
                     </div>
@@ -331,7 +331,7 @@ class BubblesGame extends React.Component {
                     <br />
                     <br />
                     {/* <button className="Modal__container_button" onClick={this.handleCloseEndGameModal}><span>Ok</span></button> */}
-                    <Link to={'/Type10'} className="link-unstyled Modal__container_button">Salir</Link>
+                    <Link to={'/'} className="link-unstyled Modal__container_button">Salir</Link>
                     <a href="/bubblesgame" className="link-unstyled Modal__container_button">Repetir</a>
 
                 </Modal>

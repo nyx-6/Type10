@@ -50,6 +50,7 @@ class Level extends React.Component {
         this.score = 0;
         this.typingLevel = "none";
         this.exerciseStatus = "notStarted";
+        this.setFocusOnStartBtn = true;
     }
     componentDidMount() {
         this.generateExercice();
@@ -64,7 +65,7 @@ class Level extends React.Component {
     }
     setFocusOnstartExerciseButton = () => {
         this.startExercise.current.focus();
-        console.log(document.activeElement);
+        // console.log(document.activeElement);
     }
     generateExercice = () => {
 
@@ -92,6 +93,7 @@ class Level extends React.Component {
         })
     }
     handleCloseStartModal = e => {
+        this.setFocusOnStartBtn = false;
         this.setState({ startModalIsOpen: false })
         this.setFocusOnKeyBoard();
     }
@@ -127,6 +129,13 @@ class Level extends React.Component {
             outFocusModalIsEnable: false
         })
     }
+
+    handleOnBlurStartBtn = e => {
+        if (this.setFocusOnStartBtn) {
+            this.setFocusOnstartExerciseButton();
+        }
+    }
+
     handleKeyDown = e => {
         if (this.state.index < this.state.exercice.length) {
             if (e.key.length === 1) {
@@ -198,7 +207,6 @@ class Level extends React.Component {
         console.log(errors);
         this.productivity = Math.round(errors / m);
     }
-
     calculateTypingLevel() {
 
         let exerciseStatus = "unfinished";
@@ -233,12 +241,12 @@ class Level extends React.Component {
                 >
                     <div className="">
                         <br/>
-                        <h2 className="modal__title">Ejercicio <span className="red">1</span></h2>
+                        <h2 className="modal__title">Práctica <span className="red"></span></h2>
                        
-                        <p className="text">Dato1: blablal   Dato2: jsdcjksbdjc  Dato3: jsdhjshd </p>
+                        {/* <p className="text">Dato1: blablal   Dato2: jsdcjksbdjc  Dato3: jsdhjshd </p> */}
                         
                         <br/>
-                        <div className="modal__start_level_text">¡Presiona <span className="modal__highlight_text">espacio</span> para comenzar!</div>
+                        <div className="modal__start_level_text">¡Presiona <span className="modal__highlight_text">espacio</span> para iniciar!</div>
                         
                         <br/>
                         <br/>
@@ -246,8 +254,9 @@ class Level extends React.Component {
                             <button  
                                 ref={this.startExercise}
                                 onClick={this.handleStartGame}
+                                onBlur={this.handleOnBlurStartBtn}
                                 className="Modal__container_button">
-                                Comenzar
+                                iniciar
                             </button>
                             <Link to={'/exercises'} className="link-unstyled Modal__container_button">Regresar</Link>
                         </div>
@@ -276,7 +285,7 @@ class Level extends React.Component {
                                 keyboardRef={this.keyboard}
                                 keyDown={this.handleKeyDown}
                                 keyUp={this.handleKeyUp}
-                                pressedKey={this.state.pressedKey}
+                                pressedKey={this.state.pressedKey.toUpperCase()}
                                 outFocus={this.handleOpenOutFocusModal}
                                 isOpen={this.state.outFocusModalIsOpen}
                                 onClose={this.handleCloseOutFocusModal}

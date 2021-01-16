@@ -3,8 +3,9 @@ import '../../styles/components/Key.css'
 
 function Key(props) {
 
+
     return (
-        <div className={props.pressedKeyValue === props.keyValue? "pressed key" : "regular key"}>
+        <div className={props.pressedKeyValue === props.keyValue ? "pressed key" : "regular key"}>
             <span className="value">{props.keyValue}</span>
         </div>
     );
