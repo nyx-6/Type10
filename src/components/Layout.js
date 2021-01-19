@@ -9,15 +9,17 @@ import Exercises from './Exercises';
 import Level from './Level';
 import BubblesGame from './games/BubblesGame';
 import BoomGame from './games/BoomGame';
+import About from './About';
+
 
 function Layout() {
     return (
         <React.Fragment>
             <Header />
             <div className="container">
-                {/* <div className="header_space"></div> */}
                 <Switch>
                     <Route exact path='/' component={Cover} />
+                    <Route path='/About' component={About} />
                     <Route path='/instructions' component={Instructions} />
                     <Route path='/exercises' component={Exercises} />
                     <Route path='/level' component={Level} />

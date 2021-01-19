@@ -10,6 +10,7 @@ function Menu() {
 
         <nav className="menu">
             <ul className="menu__main_menu">
+            <li className="menu__option"><Link to={'/about'} className="menu__link">Acerca de</Link></li>
             <li className="menu__option"><Link to={'/instructions'} className="menu__link">Instrucciones</Link></li>
                 <li className="menu__option"><Link to={'/exercises'} className="menu__link">Ejercicios</Link></li>
                 <li className="menu__option" onMouseEnter={() => { setSubMenuVisibility('visible') }}>

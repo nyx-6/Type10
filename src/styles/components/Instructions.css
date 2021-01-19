@@ -1,39 +1,37 @@
 .Instructions {
-  height: 100%;
+  display: flex;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px;
   flex-wrap: wrap;
-  position: relative;
-}
-
-div.Instructions div.content_box:first-child {
-  padding-left: 15px;
-} 
-
-div.Instructions div.content_box:last-child {
-  padding-right: 15px;
-} 
-
-div.Instructions div.content_box:not(:last-child) {
-  padding-right: 10px;
 }
 
 .tier {
   flex-direction: column;
-  font-family: 'Roboto', sans-serif;
+  flex: 1 1;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  min-width: 440px;
 }
 
-.image { 
-  height: 180px;
+.image {
+  height: 150px;
+}
+
+.image.keboard {
+  float: right
+}
+
+.position__hands {
+  display: flex;
+  flex-direction: column;
+  float: right;
 }
 
 .img_hands {
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.text {
-  font-weight: 300;
-  color: #6c6e6f;
-  font-size: 15px;
+  display: flex;
+  justify-content: center;
 }
 
 .title {
@@ -50,7 +48,18 @@ div.Instructions div.content_box:not(:last-child) {
 .imgSubTitle {
   font-size: 20px;
   font-weight: 400;
-  color:#F38E8E ;
+  color: #F38E8E;
   padding-top: 15px;
-  padding-bottom: 15px;
+}
+
+@media screen and (orientation: portrait) {
+  .Instructions {
+    flex-direction: column;
+  }
+  .tier {
+    min-width: auto;
+  }
+  .img_hands{
+    width: 50%;
+  } 
 }

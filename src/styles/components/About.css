@@ -1,0 +1,28 @@
+.About{
+    display: flex;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 60px;
+}
+
+.about__subTitle {
+  font-size: 20px;
+  font-weight: 400;
+  color: #F38E8E;
+  padding-top: 15px;
+}
+
+.tier {
+  flex-direction: column;
+  flex: 1 1;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+
+}
+
+@media screen and (orientation: portrait) {
+  .About {
+    flex-direction: column;
+  }
+}
