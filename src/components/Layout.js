@@ -16,7 +16,7 @@ function Layout() {
     return (
         <React.Fragment>
             <Header />
-            <div className="container">
+            {/* <div className="container"> */}
                 <Switch>
                     <Route exact path='/' component={Cover} />
                     <Route path='/About' component={About} />
@@ -26,7 +26,7 @@ function Layout() {
                     <Route path='/bubblesgame' component={BubblesGame} />
                     <Route path='/boomgame' component={BoomGame} />
                 </Switch>
-            </div>
+            {/* </div> */}
         </React.Fragment>
     )
 }

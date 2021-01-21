@@ -4,7 +4,12 @@ body {
   height: 100%;
   width: 100%;
   background-color: #F9F9F9;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Prompt', sans-serif;
+  overflow-x: hidden;
+}
+
+.black{
+  color: #141414;
 }
 
 .red {

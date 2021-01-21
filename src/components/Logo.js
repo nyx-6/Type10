@@ -8,8 +8,8 @@ function Logo() {
     return (
         // <li >
             <Link to={'/'} className=" logo">
-                <span className="red">Type</span>
-                <span className="white">10</span>
+                <span className="black">Type</span>
+                <span className="red">10</span>
             </Link>
         // </li>
     );
