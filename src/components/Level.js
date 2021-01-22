@@ -258,7 +258,7 @@ class Level extends React.Component {
                                 className="Modal__container_button">
                                 iniciar
                             </button>
-                            <Link to={'/exercises'} className="link-unstyled Modal__container_button">Regresar</Link>
+                            <Link to={'/exercises'} className="link-unstyled Modal__container_button">Salir</Link>
                         </div>
 
                     </div>
@@ -311,33 +311,37 @@ class Level extends React.Component {
                         <h5 className="modal__title">Nivel: {this.typingLevel}</h5>
 
                         {this.wpm < 36 || this.accuracy < 96 ?
-                            <p className="text">Te recomendamos repetir el nivel para mejorar tu precisión y velocidad</p> :
+                            <p className="text">Te recomendamos repetir el nivel para mejorar tu precisión y velocidad.</p> :
 
                             (this.wpm > 36 && this.wpm < 46) || this.accuracy < 96 ?
                                 <p className="text"> Puedes seguir practicando para alcanzar el nivel avanzado
-                                    o pasar al siguiente ejercicio</p> :
-                                <p className="text">Ya dominas este ejercicio puedes pasar al siguiente ejercicio</p>
+                                    o pasar al siguiente ejercicio.</p> :
+                                <p className="text">Ya dominas este ejercicio puedes pasar al siguiente ejercicio.</p>
                         }
                             <br/>
                         {
                             this.exerciseStatus === "repeat" ?
                                 <div>
                                     <a href="/level" className="link-unstyled Modal__container_button">Repetir</a>
-                                    <Link to={'/exercises'} className="link-unstyled Modal__container_button">Regresar</Link>
+                                    <Link to={'/exercises'} className="link-unstyled Modal__container_button">Salir</Link>
                                 </div> : this.exerciseStatus === "goodenough" ?
                                     <div>
                                         <a href="/level" className="link-unstyled Modal__container_button">Repetir</a>
                                         <Link to={'/exercises'} className="link-unstyled Modal__container_button">Siguiente</Link>
-                                        <Link to={'/exercises'} className="link-unstyled Modal__container_button">Regresar</Link>
+                                        <Link to={'/exercises'} className="link-unstyled Modal__container_button">Salir</Link>
                                     </div> : this.exerciseStatus === "finished" ?
                                         <div>
                                             <Link to={'/exercises'} className="link-unstyled Modal__container_button">Siguiente</Link>
-                                            <Link to={'/exercises'} className="link-unstyled Modal__container_button">Regresar</Link>
+                                            <Link to={'/exercises'} className="link-unstyled Modal__container_button">Salir</Link>
                                         </div> : <Link to={'/exercises'} className="">Regresar</Link>
                         }
 
                     </div>
                 </Modal>
+                <div className="circle11"></div>
+                <div className="circle10"></div>
+                <div className="circle12"></div>
+                <div className="circle13"></div>
             </div >
         )
     }

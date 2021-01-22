@@ -11,7 +11,7 @@ function Modal(props) {
         <div className="Modal">
             <div className="Modal__container">
                 <div className="Modal__logo">
-                    <span className="red">Type</span><span className="white">10</span>
+                    <span className="white">Type</span><span className="black">10</span>
                 </div>
                 <button onClick={props.onClose} className="Modal__close-button">
                     x

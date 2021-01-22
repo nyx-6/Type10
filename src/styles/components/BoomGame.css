@@ -1,6 +1,6 @@
 .gameArea {
     display: flex;
-    height: 100%;
+    height: calc(100vh - 70px);
     width: 100%;
     flex-wrap: wrap;
     font-family: 'Roboto Mono', monospace;
