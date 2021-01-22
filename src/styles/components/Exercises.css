@@ -3,21 +3,23 @@
     display: flex;
     width: 100%;
     height: 100%;
-    justify-content: center;
     background: #FFF9FB;  
     background-image: url("../../statics/back27.jpg");
-    flex: 1;
+    padding-left: 160px;
+    padding-right: 160px;
+    background-color: #00d7d5;
+
 }
 
 .lessons__gallery {
-    width: 75%;
+
     height: 100%;
     position: fixed;
-    top: 50px;
+    top: 70px;
     scroll-behavior: smooth;
     overflow-y: scroll;
     scrollbar-color: #081825 rgba(255, 255, 255, 0.1);
-    background-color: rgba(255, 255, 255, 0.8);
+    /* background-color: rgba(255, 0, 255, 0.3); */
 }
 
 .lesson__header {
@@ -30,8 +32,7 @@
 .lesson__title {
     font-size: 45px;
     font-weight: 900;
-    color: #f25067;
-    
+    color: #00d7d5;
 }
 
 .lesson__exersices{
@@ -39,7 +40,6 @@
     
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
 }
 
 .menu__lessons{
@@ -48,4 +48,49 @@
     margin-left: 10px;
     background-color: plum;
     align-self: baseline ;
+}
+
+
+.circle10 {
+    position: absolute;
+    bottom: 10px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: rgba(2, 191, 221, 0.4);
+    border-radius: 50%;
+    z-index: -1;
+}
+.circle11 {
+    position: absolute;
+    bottom: 200px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background:rgba(2, 221, 219, 0.2);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.circle12 {
+    position: absolute;
+    bottom: 130px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    background: rgba(136, 223, 247, 0.4);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+
+.circle13 {
+    position: absolute;
+    bottom: 50px;
+    left: -70px;
+    width: 200px;
+    height: 200px;
+    background:rgba(2, 221, 219, 0.5);
+    border-radius: 50%;
+    z-index: -1;
 }

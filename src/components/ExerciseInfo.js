@@ -6,24 +6,26 @@ function ExerciseInfo(props) {
     var exercise = props.info;
 
     return (
-            <Link
-                to={{
-                    pathname: './level',
-                    state: {
-                        letters: exercise.letters
-                    },
-                }}
-                className="link-unstyled"
-            >
-                <div className="exercise__info content_box" key={exercise.id}>
-                    <span className="exercise__title">Ejercicio {exercise.id}</span>
-                    <ul className="content_box">
+        <Link
+            to={{
+                pathname: './level',
+                state: {
+                    letters: exercise.letters
+                },
+            }}
+            className="link-unstyled"
+        >
+            <div className="exercise__box_info" key={exercise.id}>
+                <div className="exercise__inner_box_info">
+                    <span className="exercise__title"> {exercise.id}</span>
+                    <ul>
                         {exercise.letters.map((letter, i) =>
                             <li key={i} className="list-unstyled">{letter}</li>
                         )}
                     </ul>
                 </div>
-            </Link>
+            </div>
+        </Link>
     )
 }
 
